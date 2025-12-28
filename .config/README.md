@@ -15,6 +15,20 @@ To save nvim config:
 `config commit -m "update nvim"` 
 `config push`
 
+## Pulling the bare repo
+# 1. Define the alias for the new session
+`alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'`
+
+# 2. Clone the repo as "bare"
+`git clone --separate-git-dir=$HOME/.cfg https://github.com/yourusername/your-repo.git tmp_dotfiles`
+
+# 3. Move the files and delete the temp folder
+`rsync --recursive --verbose --exclude '.git' tmp_dotfiles/ $HOME/`
+`rm -rf tmp_dotfiles`
+
+# 4. Set the flag to hide untracked files on the new machine
+`config config --local status.showUntrackedFiles no`
+
 ## Nvim Version
 ```
 NVIM v0.11.5
