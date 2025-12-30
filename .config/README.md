@@ -20,10 +20,11 @@ To save nvim config:
 `alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'`
 
 # 2. Clone the repo as "bare"
-`git clone --separate-git-dir=$HOME/.cfg https://github.com/yourusername/your-repo.git tmp_dotfiles`
+`git clone --separate-git-dir=$HOME/.cfg git@github.com:Smelliott94/.cfg.git tmp_dotfiles`
 
 # 3. Move the files and delete the temp folder
 `rsync --recursive --verbose --exclude '.git' tmp_dotfiles/ $HOME/`
+
 `rm -rf tmp_dotfiles`
 
 # 4. Set the flag to hide untracked files on the new machine
