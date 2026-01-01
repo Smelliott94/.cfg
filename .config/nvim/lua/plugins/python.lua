@@ -6,6 +6,17 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({ ensure_installed = { "basedpyright" } })
+      vim.lsp.config("basedpyright", {
+        settings = {
+          python = {
+            analysis = {
+              useLibraryCodeForTypes = true,
+            },
+            venvPath = ".",
+            venv = ".venv",
+          },
+        },
+      })
       vim.lsp.enable("basedpyright")
     end,
   },
@@ -45,7 +56,7 @@ return {
     build = ":TSUpdate",
     opts = {
       -- 0.11 has built-in parsers for lua and vimdoc; we focus on dev languages
-      ensure_installed = { "python", "bash", "markdown" },
+      ensure_installed = { "python", "bash", "markdown", "svelte", "javascript", "typescript", "html", "css" },
       highlight = { enable = true },
       indent = { enable = true },
     },

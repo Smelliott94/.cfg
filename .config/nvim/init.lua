@@ -32,6 +32,7 @@ keymap.set("n", "gh", vim.lsp.buf.hover, { desc = "LSP: Show documentation" })
 keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
 keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit without saving" })
 keymap.set("n", "<leader>x", ":x<CR>", { desc = "Save and quit" })
+keymap.set("n", "<leader>d", vim.diagnostic.open_float)
 
 -- Insert Mode
 keymap.set("i", 'jj', "<ESC>", { desc = "Exit insert mode with jj" })
@@ -39,6 +40,20 @@ keymap.set("i", 'jj', "<ESC>", { desc = "Exit insert mode with jj" })
 -- Stay in visual mode while indenting
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
+
+-- Keymap to toggle with Space + e, close tree if it has focus
+vim.keymap.set("n", "<leader>e", function()
+    local api = require("nvim-tree.api")
+    local bufnr = vim.api.nvim_get_current_buf()
+
+    if api.tree.is_visible() and api.tree.is_tree_buf(bufnr) then
+        api.tree.close()
+    else
+        api.tree.open()
+    end
+end,
+{ desc = "Toggle File Explorer" }
+)
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

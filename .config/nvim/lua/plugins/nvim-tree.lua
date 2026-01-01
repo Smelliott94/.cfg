@@ -32,9 +32,6 @@ return {
           custom = { "^\\.git$" },
         },
       })
-
-      -- Keymap to toggle with Space + e
-      vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle File Explorer" })
     end,
   },
 }
