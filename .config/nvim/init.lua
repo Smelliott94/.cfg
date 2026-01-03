@@ -18,11 +18,11 @@ opt.expandtab = true -- Convert tabs to spaces
 opt.termguicolors = true -- Enable 24-bit RGB color
 opt.clipboard = "unnamedplus"
 vim.diagnostic.config({
-	virtual_text = true, -- Shows text at the end of the line
-	float = {
-		border = "rounded",
-		source = "always", -- Shows if it's Pyright, Lua_LS, etc.
-	},
+    virtual_text = true, -- Shows text at the end of the line
+    float = {
+        border = "rounded",
+        source = "always", -- Shows if it's Pyright, Lua_LS, etc.
+    },
 })
 -- 3. Keymaps (General)
 local keymap = vim.keymap
@@ -33,6 +33,28 @@ keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit without saving" })
 keymap.set("n", "<leader>x", ":x<CR>", { desc = "Save and quit" })
 keymap.set("n", "<leader>d", vim.diagnostic.open_float)
 
+-- DAP
+keymap.set("n", "<F5>", function()
+    require("dap").continue()
+end)
+keymap.set("n", "<F10>", function()
+    require("dap").step_over()
+end)
+keymap.set("n", "<F11>", function()
+    require("dap").step_into()
+end)
+keymap.set("n", "<F12>", function()
+    require("dap").step_out()
+end)
+keymap.set("n", "<Leader>b", function()
+    require("dap").toggle_breakpoint()
+end)
+keymap.set("n", "<Leader>dr", function()
+    require("dap").repl.open()
+end)
+keymap.set("n", "<Leader>dc", function()
+    require("dapui").close()
+end)
 -- Insert Mode
 keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode with jj" })
 
@@ -42,26 +64,26 @@ vim.keymap.set("x", ">", ">gv")
 
 -- Keymap to toggle with Space + e, close tree if it has focus
 vim.keymap.set("n", "<leader>e", function()
-	local api = require("nvim-tree.api")
-	local bufnr = vim.api.nvim_get_current_buf()
+    local api = require("nvim-tree.api")
+    local bufnr = vim.api.nvim_get_current_buf()
 
-	if api.tree.is_visible() and api.tree.is_tree_buf(bufnr) then
-		api.tree.close()
-	else
-		api.tree.open()
-	end
+    if api.tree.is_visible() and api.tree.is_tree_buf(bufnr) then
+        api.tree.close()
+    else
+        api.tree.open()
+    end
 end, { desc = "Toggle File Explorer" })
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
