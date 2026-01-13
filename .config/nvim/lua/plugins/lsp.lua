@@ -5,7 +5,7 @@ return {
         dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
         config = function()
             require("mason").setup()
-            require("mason-lspconfig").setup({ ensure_installed = { "basedpyright", "stylua" } })
+            require("mason-lspconfig").setup({ ensure_installed = { "basedpyright", "stylua", "rust-analyzer" } })
             vim.lsp.config("basedpyright", {
                 settings = {
                     python = {
