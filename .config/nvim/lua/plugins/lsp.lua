@@ -20,6 +20,7 @@ return {
             vim.lsp.enable("lua_ls")
             vim.lsp.enable("basedpyright")
             vim.lsp.enable("stylua")
+            vim.lsp.enable("rust-analyzer")
         end,
     },
 
@@ -67,7 +68,17 @@ return {
         build = ":TSUpdate",
         opts = {
             -- 0.11 has built-in parsers for lua and vimdoc; we focus on dev languages
-            ensure_installed = { "python", "bash", "markdown", "svelte", "javascript", "typescript", "html", "css" },
+            ensure_installed = {
+                "python",
+                "bash",
+                "markdown",
+                "markdown_inline",
+                "svelte",
+                "javascript",
+                "typescript",
+                "html",
+                "css",
+            },
             highlight = { enable = true },
             indent = { enable = true },
         },
