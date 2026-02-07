@@ -3,6 +3,9 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+if vim.fn.has("wsl") == 1 then
+    vim.g.netrw_browsex_viewer = "wslview"
+end
 
 -- 2. General Settings
 local opt = vim.opt
